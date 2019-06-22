@@ -10,17 +10,17 @@ package Modelo;
  * @author TOBAR
  * @Fecha 16/06/219
  */
-public class Conection {
-    String url;
-    String user;
-    String contra;
-    String driver;
+public class Database {
+   private String url;
+   private String user;
+   private String contra;
+   private String driver;
 
-    public Conection() {
-        this.url = "jdbc:mysql://mysql:3306/dasePrueba";
+    public Database() {
+        this.url = "jdbc:mysql://mysql:3306/restaurante";
         this.user =  "root";
         this.contra = "";
-        this.driver = "com.mysql.jdbec.Driver";
+        this.driver = "com.mysql.jdbc.Driver";
     }
 
     public String getUrl() {
