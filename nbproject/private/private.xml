@@ -3,13 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/TOBAR/Documents/GitHub/Premium/web/index.jsp</file>
-            <file>file:/C:/Users/TOBAR/Documents/GitHub/Premium/web/Admin/admin.jsp</file>
-            <file>file:/C:/Users/TOBAR/Documents/GitHub/Premium/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/TOBAR/Documents/GitHub/Premium/src/java/servlets/SERVLOGIN.java</file>
-            <file>file:/C:/Users/TOBAR/Documents/GitHub/Premium/src/java/Modelo/Database.java</file>
-            <file>file:/C:/Users/TOBAR/Documents/GitHub/Premium/web/login.jsp</file>
-            <file>file:/C:/Users/TOBAR/Documents/GitHub/Premium/src/java/Modelo/Acceso.java</file>
+            <file>file:/C:/JAVA/PremiumSV/src/java/modelo/Sucursal.java</file>
+            <file>file:/C:/JAVA/PremiumSV/src/java/modelo/UsuarioDao.java</file>
+            <file>file:/C:/JAVA/PremiumSV/web/indexAdmin.jsp</file>
+            <file>file:/C:/JAVA/PremiumSV/src/java/modelo/Usuario.java</file>
+            <file>file:/C:/JAVA/PremiumSV/web/.vscode/launch.json</file>
         </group>
     </open-files>
 </project-private>
