@@ -11,11 +11,11 @@ $(document).ready(function () {
 $(document).on('click', '#btnSubmit', function (e) {
     e.preventDefault();
     if ($(this).attr('value') == 'mod') {
-        agregar();
+        modificar();
        // swal('Atención', "Modificar Registro?", 'question');
     }
     else if ($(this).attr('value') == 'add') {
-        modificar();
+        agregar();
        // swal('Atención', "¿Agregar Registro?", 'Agregar');
     }
 });
@@ -42,18 +42,17 @@ $(document).on('click', '#btnModificar', function () {
 
     //obtengo los datos de la tabla con la variable 'tabla' antes creada
     var data = tabla.row($(this).parent().parent().parent()).data();
-    /*console.log(data["nombre"]);
-
+    console.log(data["nombre"]);
     $("#txtNombre").val(data["nombre"]), 
     $("#txtApellido").val(data["apellido"]),
     $("#txtUsuario").val(data["usuario"]),
     $("#txtRol").val("rol")
-*/
+    
     $("#btnSubmit").attr('value', 'mod');
     $("#btnSubmit").text('Modificar');
-  //  $("#tituloForm").parent().parent().removeClass('box-primary').addClass('box-success');
+    //$("#tituloForm").parent().parent().removeClass('box-primary').addClass('box-success');
     $("#tituloForm").text('Modificar Usuarioas');;
-   // idRow = data["id"];
+    //idRow = data["id"];
     //escondo todo lo que tenga que ver con la tabla
 });
 
@@ -123,7 +122,6 @@ function agregar(){
         pContra: $("#txtContra").val(),
         pRol:$("#txtRol").val()
     };
-    $("#selSucursal").find('option').remove().end();
     $.ajax({
         type: "POST", //Metodo por el que se realiza la petición 
         url: "../../ControlUsuario", //url del servlet al que apunta la petición
