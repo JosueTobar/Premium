@@ -5,6 +5,8 @@ package modelo;
  * @author josue.tobarfgkss
  */
 import java.sql.*;
+import java.util.ArrayList;
+
 public class UsuarioDao {
 
     private PreparedStatement ps;   //variable PreparedStatement para ejecutar una consilta a la BD
@@ -34,9 +36,31 @@ public class UsuarioDao {
         return nivel;
     }
 
+    public ArrayList<Usuario> mostrar() {
+        ArrayList<Usuario> lista = new ArrayList<>();
+        try {
+            ps = con().prepareStatement("select id, nombre,apellido,id_sucursales,username,pass,rol from usuarios;"); //consulta para optener el nivel del usuario 
+            rs = ps.executeQuery();         //Ejecucuion de la consulta y dar el valor a rs
+            while (rs.next()) {
+                Usuario obj = new Usuario();
+                obj.setId(rs.getInt("id"));
+                obj.setSucursal(rs.getInt("id_sucursales"));
+                obj.setNombre(rs.getString("nombre"));
+                obj.setApellido(rs.getString("apellido"));
+                obj.setUsername(rs.getString("username"));
+                obj.setPass(rs.getString("pass"));
+                obj.setRol(rs.getInt("rol"));
+                lista.add(obj);          //Agrehar el objeto  a la listas 
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("SucursalDao" + e.toString());
+        }
+        return lista;
+    }
+
     public boolean ingresar(Usuario objU) {
         try {
-            ps = con().prepareStatement("INSERT INTO usuarios ( id,Nombre,Apellido,id_sucursales,rol,username,pass ) VALUES (NULL,?,?,?,?,?,?)"); //consulta para optener el nivel del usuario  
+            ps = con().prepareStatement("INSERT INTO usuarios (id,Nombre,Apellido,id_sucursales,rol,username,pass ) VALUES (NULL,?,?,?,?,?,?)"); //consulta para optener el nivel del usuario  
             ps.setInt(1, objU.getId());             //Enviar parametros a la consulta
             ps.setString(2, objU.getNombre());      //Enviar parametros a la consulta 
             ps.setString(3, objU.getApellido());    //Enviar parametros a la consulta 
@@ -51,7 +75,8 @@ public class UsuarioDao {
         }
         return true;
     }
-        public boolean modificar(Usuario objU) {
+
+    public boolean modificar(Usuario objU) {
         try {
             ps = con().prepareStatement("INSERT INTO usuarios ( id,Nombre,Apellido,id_sucursales,rol,username,pass ) VALUES (NULL,?,?,?,?,?,?)"); //consulta para optener el nivel del usuario  
             ps.setInt(1, objU.getId());             //Enviar parametros a la consulta
@@ -68,7 +93,8 @@ public class UsuarioDao {
         }
         return true;
     }
-       public boolean eliminar(int id) {
+
+    public boolean eliminar(int id) {
         try {
             ps = con().prepareStatement("INSERT INTO usuarios ( id,Nombre,Apellido,id_sucursales,rol,username,pass ) VALUES (NULL,?,?,?,?,?,?)"); //consulta para optener el nivel del usuario  
             ps.setInt(1, id);           //Enviar parametros a la consulta 
@@ -79,5 +105,5 @@ public class UsuarioDao {
         }
         return true;
     }
-    
+
 }
