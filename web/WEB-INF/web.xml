@@ -16,6 +16,10 @@
         <servlet-name>CMesa</servlet-name>
         <servlet-class>controlador.CMesa</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SMesa</servlet-name>
+        <servlet-class>controlador.SMesa</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControlLogin</servlet-name>
         <url-pattern>/ControlLogin</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>CMesa</servlet-name>
         <url-pattern>/CMesa.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SMesa</servlet-name>
+        <url-pattern>/SMesa</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -168,8 +168,8 @@
                             if (estado.equals("A")) {
                                 estado = "primary";
                             } else {
-                                estado = "warning";;
-                            };
+                                estado = "warning";
+                            }
 
                     %> 
                     <div class="col-md-4 mesas" >
@@ -183,7 +183,7 @@
                                 </div>
                             </div>
                             <div class="box-body" style="display: none;"> 
-                                <FORM NAME="frmMesa" action="../CMesa.do?accion=add&estado=<%=estado%>&idmesa=<%=m.getId()%>&nom=<%=m.getNombre()%>" METHOD="POST">
+                                <FORM NAME="frmMesa" action="../SMesa?accion=add&estado=<%=estado%>&idmesa=<%=m.getId()%>" method="POST">
                                     <INPUT class="btn btn-indo pull-right" TYPE="submit" VALUE="Button1" >
 
 
