@@ -7,7 +7,6 @@ package controlador;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import modelo.UsuarioDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
@@ -47,19 +46,20 @@ public class ControlLogin extends HttpServlet {
             String sucursal = request.getParameter("selSucursal");
 
             RequestDispatcher res;
-            UsuarioDao obj_b = new UsuarioDao();
-
+            Usuario obj_b = new Usuario();
+                
             if (!username.equals("") && !contra.equals("")) {
 
                 switch (obj_b.validar(username, contra, sucursal)) {
                     case 1:
-                        request.getSession().setAttribute("usuario",username);
-                        request.getSession().setAttribute("nivel","1");
-                        request.getSession().setAttribute("sucursal",sucursal);
+                        HttpSession ses = request.getSession();
+                        ses.setAttribute("user",username);
+                        ses.setAttribute("nivel","1");
                         request.getRequestDispatcher("indexAdmin.jsp").forward(request, response);
         
                         break;
                     case 2:
+                        
                         request.getSession().setAttribute("usuario",username);
                         request.getSession().setAttribute("nivel","2");
                         request.getSession().setAttribute("sucursal",sucursal);
@@ -72,9 +72,7 @@ public class ControlLogin extends HttpServlet {
                         request.getRequestDispatcher("views/indexMesero.jsp").forward(request, response);
                         break;
                     default:
-                        request.setAttribute("nivel", "0");//usiario no exixte 
-                        res = request.getRequestDispatcher("login.jsp");
-                        res.forward(request, response);
+                          request.getRequestDispatcher("index.jsp").forward(request, response);
                         break;
                 }
             }

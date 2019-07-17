@@ -4,9 +4,33 @@
         <servlet-name>ControlLogin</servlet-name>
         <servlet-class>controlador.ControlLogin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SUsuario</servlet-name>
+        <servlet-class>controlador.SUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Util</servlet-name>
+        <servlet-class>controlador.Util</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CMesa</servlet-name>
+        <servlet-class>controlador.CMesa</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControlLogin</servlet-name>
         <url-pattern>/ControlLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SUsuario</servlet-name>
+        <url-pattern>/SUsuario.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Util</servlet-name>
+        <url-pattern>/Util.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CMesa</servlet-name>
+        <url-pattern>/CMesa.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

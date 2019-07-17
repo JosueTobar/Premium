@@ -5,22 +5,35 @@
  */
 package modelo;
 
+import com.mysql.jdbc.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 /**
  *
  * @author josue.tobarfgkss
  */
 public class Conex {
-   private String url;
-   private String user;
-   private String contra;
-   private String driver;
+
+    private String url = "jdbc:mysql://localhost/restaurante";
+    private String user = "root";
+    private String contra = "";
+    private String driver = "com.mysql.jdbc.Driver";
+    private Connection con;
 
     public Conex() {
-        this.url = "jdbc:mysql://localhost:3306/restaurante";
-        this.user =  "root";
-        this.contra = "";
-        this.driver = "com.mysql.jdbc.Driver";
+        try {
+            Class.forName(this.driver);
+            this.con = (Connection) DriverManager.getConnection(this.url, this.user, this.contra);
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("Error DB: " + e.getMessage());
+        }
     }
+
+    public Connection getConexion() {
+        return this.con;
+    }
+
     public String getUrl() {
         return url;
     }
@@ -36,4 +49,5 @@ public class Conex {
     public String getDriver() {
         return driver;
     }
+
 }
