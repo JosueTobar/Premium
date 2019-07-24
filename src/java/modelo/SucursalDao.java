@@ -28,8 +28,9 @@ public class SucursalDao {
     public ArrayList<Sucursal> listaSucursales() {
         ArrayList<Sucursal> listSucursal = new ArrayList<>();
         try {
-            ps = con().prepareStatement("SELECT * FROM vSucursal;"); //consulta para optener el nivel del usuario 
+            ps = con().prepareStatement("SELECT * FROM CATEGORIA;"); //consulta para optener el nivel del usuario 
             rs = ps.executeQuery();         //Ejecucuion de la consulta y dar el valor a rs
+
             while (rs.next()) {
                 Sucursal obj = new Sucursal();
                 obj.setId(rs.getString("id"));

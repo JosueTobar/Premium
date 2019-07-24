@@ -34,11 +34,23 @@
         </span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="http://localhost:8080/Preminum/views/usuario.jsp"><i class="fa fa-circle-o"></i>Usuarios</a></li> 
+        <li><a href="../vistas/usuario.jsp"><i class="fa fa-circle-o"></i>Usuarios</a></li> 
       </ul>
     </li>
     
-    <li class="header">SERVICIO</li>
+     <li class="treeview active menu-open">
+      <a href="#">
+        <i class="fa fa-table"></i> <span>PRODUCTOS</span>
+        <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+      </a>
+      <ul class="treeview-menu">
+        <li><a href="../vistas/categorias.jsp"><i class="fa fa-circle-o"></i>Categorias</a></li> 
+        <li><a href="../vistas/productos.jsp"><i class="fa fa-circle-o"></i>Productos</a></li> 
+      
+      </ul>
+    </li>
     <li class="treeview active menu-open">
       <a href="#">
         <i class="fa fa-table"></i> <span>MESAS</span>
@@ -47,9 +59,20 @@
         </span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="http://localhost:8080/Preminum/views/mesas.jsp"><i class="fa fa-circle-o"></i>Mesas</a></li> 
+        <li><a href="../vistas/mesas.jsp"><i class="fa fa-circle-o"></i>Mesas</a></li> 
       </ul>
     </li>
-
+     <li class="header">SERVICIO</li>
+    <li class="treeview active menu-open">
+      <a href="#">
+        <i class="fa fa-table"></i> <span>Cuentas</span>
+        <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+      </a>
+      <ul class="treeview-menu">
+        <li><a href="../vistas/cuentas.jsp"><i class="fa fa-circle-o"></i>Neuva Cuenta</a></li> 
+      </ul>
+    </li>
   </ul>
 </section>

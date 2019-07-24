@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo;
 
 import java.sql.*;
 import java.util.ArrayList;
+import util.Conexion;
 
 /**
  *
@@ -15,33 +12,37 @@ import java.util.ArrayList;
 public class Usuario {
 
     private Integer id;
-    private Integer sucursal;
     private Integer rol;
     private String nombre;
     private String apellido;
     private String username;
+    private String estado;
     private String pass;
 
-    private Conex conn = new Conex();
-    private PreparedStatement ps;
+    private Conexion conn = new Conexion();
+    private java.sql.Connection con = null;
+    private java.sql.PreparedStatement ps;
     private ResultSet rs;
 
     public Usuario() {
+        this.con = this.conn.getConexion();
     }
 
-    public Usuario(Integer id, Integer sucursal, Integer rol, String nombre, String apellido, String username, String pass) {
+    public Usuario(Integer id, String nombre, String apellido, String username, String estado, String pass) {
         this.id = id;
-        this.sucursal = sucursal;
-        this.rol = rol;
         this.nombre = nombre;
         this.apellido = apellido;
         this.username = username;
+        this.estado = estado;
         this.pass = pass;
     }
 
-    Connection con() throws SQLException, ClassNotFoundException {
-        Class.forName(conn.getDriver());
-        return DriverManager.getConnection(conn.getUrl(), conn.getUser(), conn.getContra());
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public Integer getId() {
@@ -50,14 +51,6 @@ public class Usuario {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getSucursal() {
-        return sucursal;
-    }
-
-    public void setSucursal(Integer sucursal) {
-        this.sucursal = sucursal;
     }
 
     public Integer getRol() {
@@ -99,84 +92,74 @@ public class Usuario {
     public void setPass(String pass) {
         this.pass = pass;
     }
-    public int validar(String username, String pass, String sucursal) {
+
+    public int validar(String username, String pass) {
         int nivel = 0;
         try {
-            ps = con().prepareStatement("SELECT TIPO_USUARIO_ID FROM USUARIO WHERE USUARIO=? AND CONTRA =?;"); //consulta para optener el nivel del usuario  
+            ps = this.con.prepareStatement("SELECT TIPO_USUARIO_ID FROM USUARIO WHERE USUARIO=? AND CONTRA = ?"); //consulta para optener el nivel del usuario  
             ps.setString(1, username);  //Enviar parametros a la consulta
             ps.setString(2, pass);      //Enviar parametros a la consulta 
             rs = ps.executeQuery();       //Ejecucuion de la consulta y dar el valor a rs
             while (rs.next()) {
                 nivel = Integer.parseInt(rs.getString(1));
-                return nivel;            //Retornar el nivel del susuario
-
             }
-        } catch (ClassNotFoundException | NumberFormatException | SQLException e) {
+        } catch (NumberFormatException | SQLException e) {
+            System.out.println("Error SQL-validar: " + e.getMessage());
+            System.out.println("Error SQL-validar: " + e.getStackTrace());
         }
         return nivel;
     }
-    
+
     public ArrayList<Usuario> mostrar() {
         ArrayList<Usuario> lista = new ArrayList<>();
         try {
-            ps = con().prepareStatement("select id, nombre,apellido,id_sucursales,username,pass,rol from usuarios;"); //consulta para optener el nivel del usuario 
+            ps = this.con.prepareStatement("select *  from usuario;"); //consulta para optener el nivel del usuario 
             rs = ps.executeQuery();
             while (rs.next()) {
                 Usuario usu = new Usuario();
-                usu.setId(rs.getInt("id"));
-                usu.setSucursal(rs.getInt("id_sucursales"));
-                usu.setNombre(rs.getString("nombre"));
-                usu.setApellido(rs.getString("apellido"));
-                usu.setUsername(rs.getString("username"));
-                usu.setPass(rs.getString("pass"));
-                usu.setRol(rs.getInt("rol"));
+                usu.setId(rs.getInt("ID"));
+                usu.setNombre(rs.getString("NOMBRE"));
+                usu.setApellido(rs.getString("APELLIDO"));
+                usu.setUsername(rs.getString("USUARIO"));
+                usu.setEstado(rs.getString("ESTADO"));
+                usu.setPass(rs.getString("CONTRA"));
+                usu.setRol(rs.getInt("TIPO_USUARIO_ID"));
                 lista.add(usu);
             }
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (Exception e) {
             System.out.println("SucursalDao" + e.toString());
         }
         return lista;
     }
-
-   
     public boolean agregar() {
         boolean add = false;
         try {
-            ps = con().prepareStatement("INSERT INTO usuarios (Nombre,Apellido,id_sucursales,rol,username,pass) VALUES('"+this.nombre+"','"+this.apellido+"',"+this.sucursal+","+this.rol+",'"+this.username+"','"+this.pass+"');"); //consulta para optener el nivel del usuario  
+            ps = this.con.prepareStatement("INSERT INTO `restaurante`.`usuario` (`NOMBRE`, `APELLIDO`, `USUARIO`, `CONTRA`, `ESTADO`, `TIPO_USUARIO_ID`) VALUES ('"+this.nombre+"', '"+this.apellido+"', '"+this.username+"', '"+this.pass+"', '"+this.estado+"', '"+this.rol+"');"); //consulta para optener el nivel del usuario  
             ps.executeUpdate();
             add = true;
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (Exception e) {
             System.out.println("Error SQL-Add: " + e.getMessage());
         }
         return add;
     }
-
-    public boolean modificar() {
+     public boolean modificar() {
         boolean edit = false;
         try {
-            ps = con().prepareStatement("INSERT INTO usuarios (id,Nombre,Apellido,id_sucursales,rol,username,pass ) VALUES (NULL,?,?,?,?,?,?)"); //consulta para optener el nivel del usuario  
-            ps.setString(1, this.nombre);
-            ps.setString(2, this.apellido);
-            ps.setInt(3, this.sucursal);
-            ps.setInt(4, this.rol);
-            ps.setString(5, this.username);
-            ps.setString(6, this.pass);
-            ps.executeQuery();
+            ps = this.con.prepareStatement("UPDATE usuario SET NOMBRE = '"+this.nombre+"', APELLIDO = '"+this.apellido+"', USUARIO = '"+this.username+"', CONTRA = '"+this.pass+"', ESTADO = '"+this.estado+"' WHERE ID ="+this.id+";"); 
+            ps.executeUpdate();
             edit = true;
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (Exception e) {
             System.out.println("Error SQL-Add: " + e.getMessage());
         }
         return edit;
     }
-
     public boolean eliminar(int id) {
         boolean delete = false;
-
         try {
-            ps = con().prepareStatement("delete from usuarios where id="+id+";"); //consulta para optener el nivel del usuario  
+            ps = this.con.prepareStatement("delete from usuario where id="+id+";"); //consulta para optener el nivel del usuario  
             ps.executeUpdate();
             delete = true;
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (Exception e) {
             System.out.println("Error SQL-Delete: " + e.getMessage());
         }
         return delete;

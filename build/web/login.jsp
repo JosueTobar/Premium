@@ -1,8 +1,3 @@
-<%-- 
-    Document   : login
-    Created on : 22-jun-2019, 3:21:27
-    Author     : TOBAR
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
@@ -39,7 +34,7 @@
 
                 <p class="login-box-msg"> </p>
 
-                <form action="ControlLogin">
+                <form action="ControlLogin" action="POST">
                        
                     <div class="form-group has-feedback">
                         <input type="text" class="form-control" name="txtUsuario" placeholder="Usuario">
@@ -83,8 +78,6 @@
         <script src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="resources/js/login.js"></script>
        
-       
-
         <script>
             $(function () {
                 $('input').iCheck({
@@ -94,24 +87,6 @@
                 });
             });
         </script>
-        <script>
-//            $(document).ready(function () {
-//                var data = { pAccion: "Login", pNombre: "Sucursal" };
-//                $("#selSucursal").find('option').remove().end();
-//                $.ajax({
-//                    type: "POST",                    //Metodo por el que se realiza la petición 
-//                    url: "ControlLogin",             //url del servlet al que apunta la petición
-//                    contentType: "application/json", // NOT dataType!
-//                    data:JSON.stringify(data),
-//                    success: function (response) {
-//                        if (!response['error']) {
-//                             $.each(response, function (ind) {
-//                                    $("#selSucursal").append("<option value=" + response[ind].id + ">" + response[ind].nombre + "</option>");
-//                              });
-//                        }
-//                    }
-//                });
-//            });
-        </script>
+
     </body>
 </html>
