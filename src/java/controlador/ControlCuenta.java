@@ -6,22 +6,17 @@
 package controlador;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.ProcessBuilder.Redirect.Type;
 import java.util.ArrayList;
-import java.util.List;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.Mesa;
-import modelo.MesaDao;
-import modelo.Producto;
-import modelo.ProductoDao;
-import modelo.SucursalDao;
+import modelo.*;
+
 
 /**
  *
@@ -29,15 +24,6 @@ import modelo.SucursalDao;
  */
 public class ControlCuenta extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -69,6 +55,15 @@ public class ControlCuenta extends HttpServlet {
                 ArrayList<Mesa> mesas = mes.listaMesasByID(Integer.parseInt(data.get("pId").getAsString()));
                  json = new Gson().toJson(mesas);
                 break;
+            case "addPedido":
+                 Pedido ped = new Pedido();
+                 ped.setFecha(Date.valueOf(data.get("pFecha").getAsString()));
+                 ped.setEstado("A");
+                 ped.setIdMesa(Integer.parseInt(data.get("pMesa").getAsString()));
+                 ped.setIdUsuario(Integer.parseInt(data.get("pUsurio").getAsString()));
+                 json = new Gson().toJson("add");
+                break;  
+              
         }
 
         response.setContentType("application/json");

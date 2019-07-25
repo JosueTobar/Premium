@@ -16,6 +16,10 @@
         <servlet-name>ControlMesa</servlet-name>
         <servlet-class>controlador.ControlMesa</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControlUsuario</servlet-name>
+        <servlet-class>controlador.ControlUsuario</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControlLogin</servlet-name>
         <url-pattern>/ControlLogin</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>ControlMesa</servlet-name>
         <url-pattern>/ControlMesa.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControlUsuario</servlet-name>
+        <url-pattern>/ControlUsuario.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

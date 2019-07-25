@@ -24,9 +24,14 @@ public class PedidoDetalleDao {
             while (rs.next()) {
                 PedidoDetalle obj = new PedidoDetalle();
                 obj.setId(rs.getInt("ID"));
+                obj.setCantidad(rs.getInt("CANTIDAD"));
+                obj.setTotal(rs.getInt("TOTAL"));
                 obj.setIdPedido(rs.getInt("PEDIDO_ID"));
                 obj.setIdProducto(rs.getInt("PRODUCTO_ID"));
                 obj.setEstado(rs.getString("ESTADO"));
+                obj.setDescripcion(rs.getString("DESCRIPCION"));
+                obj.setDescripcion(rs.getString("COMENTARIO"));
+                obj.setPrecio(rs.getFloat("PRECIO"));
                 System.out.println(obj);
                 listPedidoDetalle.add(obj); 
             }
@@ -37,7 +42,7 @@ public class PedidoDetalleDao {
  public boolean agregar(PedidoDetalle ped) {
         boolean add = false;
         try {
-            ps = this.con.prepareStatement("INSERT INTO `restaurante`.`detalle_pedido` (`PRODUCTO_ID`, `PEDIDO_ID`, `ESTADO`) VALUES ('"+ped.getIdProducto()+"', '"+ped.getIdPedido()+"', '"+ped.getEstado()+"');");
+            ps = this.con.prepareStatement("INSERT INTO `restaurante`.`detalle_pedido` (`DESCRIPCION`, `PRODUCTO_ID`, `PEDIDO_ID`, `ESTADO`, `CANTIDAD`, `TOTAL`, `PRECIO`, `COMENTARIO`) VALUES ('"+ped.getDescripcion()+"', '"+ped.getIdProducto()+"', '"+ped.getIdPedido()+"', '"+ped.getEstado()+"', '"+ped.getCantidad()+"', '"+ped.getTotal()+"', '"+ped.getPrecio()+"', '"+ped.getComentario()+"');");
             ps.executeUpdate();
             add = true;
         } catch (SQLException e) {
