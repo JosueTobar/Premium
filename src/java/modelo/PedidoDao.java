@@ -39,16 +39,27 @@ public ArrayList<Pedido> listaPedidosByEstado(String estado) {
 
         return listPedido;
     }
- public boolean agregar(Pedido ped) {
+ public ArrayList<String> agregar(Pedido ped) {
+     ArrayList<String> respuesta = new ArrayList<>();
         boolean add = false;
         try {
             ps = this.con.prepareStatement("INSERT INTO `restaurante`.`pedido` (`FECHA`, `ESTADO`, `MESA_ID`, `USUARIO_ID`) VALUES ('"+ped.getFecha()+"', '"+ped.getEstado()+"', '"+ped.getIdMesa()+"', '"+ped.getIdUsuario()+"');");
             ps.executeUpdate();
-            add = true;
+            respuesta.add("true");
         } catch (SQLException e) {
             System.out.println("Error SQL-Add: " + e.getMessage());
         }
-        return add;
+        try {
+            ps = this.con.prepareStatement("SELECT MAX(ID)ACTUAL FROM PEDIDO; ");
+            rs = ps.executeQuery();         
+            while (rs.next()) {
+              respuesta.add(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error SQL-Add: " + e.getMessage());
+        }
+        
+        return respuesta;
     }
      public boolean modificar(Pedido ped) {
         boolean edit = false;

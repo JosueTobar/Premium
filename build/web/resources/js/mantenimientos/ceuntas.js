@@ -3,6 +3,7 @@ var nuevoPedido = [];
 var producto =[];
 var mesaActiva = 0;
 var fechaHoy;
+var usuario = 1;
  
 window.onload = function () {
     var fecha = new Date(); //Fecha actual
@@ -16,6 +17,15 @@ window.onload = function () {
     fechaHoy = ano +"-"+mes+"-"+dia;
 }
 
+
+$(document).on('click', "#btnAddPedido", function (e) {
+    if(mesaActiva != 0){
+        insertPedido(mesaActiva,1);
+    }  else{
+        alert("SELECCIONE UNA MESA ")
+    }  
+   
+});
 $("#selMesa").change(function() {
     cargaMesa($("#selMesa").val());
   });
@@ -28,7 +38,7 @@ function addPedido(id){
     if(mesaActiva != 0){
         for (var i = 0; i < producto.length; i++) {
             if(producto[i][0] == id){
-                nuevoPedido.push([producto[i][0],producto[i][1],producto[i][2],$("#catida"+id).val(),mesaActiva]);
+                nuevoPedido.push([producto[i][1],producto[i][0],$("#catida"+id).val(),mesaActiva,producto[i][3] ]);
             }
         }
         mostraPedido();
@@ -37,7 +47,6 @@ function addPedido(id){
     }
   
 }
-
 
 function mostraPedido(){
     $("#pedido").find('tr').remove().end();
@@ -55,17 +64,17 @@ function insertPedido(mesa,usuario){
         data: JSON.stringify(data),
         success: function (response) {
             for (var i = 0; i < nuevoPedido.length; i++) {
-                console.log(nuevoPedido[i]);
-                insertarPedidoDetalle(); 
-               // $("#pedido").append("<tr><td>"+nuevoPedido[i][2]+"</td><td>"+nuevoPedido[i][3]+"</td><td> "+nuevoPedido[i][1]+"</td> </tr> ");
+                console.log(response[1],nuevoPedido[i][0], nuevoPedido[i][1],nuevoPedido[i][2] ,nuevoPedido[i][4]);
+                insertarPedidoDetalle(response[1],nuevoPedido[i][0], nuevoPedido[i][1],nuevoPedido[i][2] ,nuevoPedido[i][4]); 
+                
             }
              
         }
     }); 
 }
-function insertarPedidoDetalle(idPedido,descripcion, idProducto, estado, cantidad, total){
+function insertarPedidoDetalle(idPedido,descripcion, idProducto,total, precio ){
     
-    var data = {pAccion: "addPedidoDetalle", pPedido: idPedido, pDescripcion: descripcion, pProducto: idProducto, pEstado: estado, pCantidad: cantidad, pTotoal: total};
+    var data = {pAccion: "addPedidoDetalle", pPedido: idPedido, pDescripcion: descripcion, pProducto: idProducto, pTotoal: total, pPrecio: precio};
     $.ajax({
         type: "POST", 
         url: "../ControlCuenta.do", 
@@ -99,7 +108,6 @@ function cargaMesa(idMesa) {
     nuevoPedido = [];
     mostraPedido();
     mesaActiva = idMesa;
-    $("#btnAddPedido").val(idMesa);
     var data = {pAccion: "ListarMesa", pId: idMesa};
     $("#mesas").find('tr').remove().end();
     $.ajax({
@@ -127,7 +135,7 @@ function cargaproductos(idCategoia) {
         data: JSON.stringify(data),
         success: function (response) {
                 $.each(response, function (ind) {
-                    producto.push([response[ind].id,response[ind].nombre,response[ind].imagen]);
+                    producto.push([response[ind].id,response[ind].nombre,response[ind].imagen,response[ind].precio,response[ind].estado]);
                     $("#productos").append("<tr> <td> <img width='40' height='40' src='../resources/img/icons/comida/1455739559_Kitchen_Bold_Line_Color_Mix-32_icon-icons.com_53429.png'></td> <td><h4>"+response[ind].nombre+"</h4></td> <td> <div class='product-quantity pull-right'> <input id='catida"+response[ind].id+"' type='number' value='1' min='1'> </div> </td> <td> <input type='button' onclick='addPedido("+response[ind].id+");' class='btn btn-success pull-right' value='Agregar'  /> </td> </tr> ");
                 });
         }

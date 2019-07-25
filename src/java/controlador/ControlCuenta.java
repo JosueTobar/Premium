@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controlador;
 
 import com.google.gson.Gson;
@@ -45,7 +41,12 @@ public class ControlCuenta extends HttpServlet {
         String accion = data.get("pAccion").getAsString();   //Optener datos de la petición 
         String json = " ";
         ProductoDao pro = new ProductoDao();
+        Pedido ped = new Pedido();
+        PedidoDao pedDao = new PedidoDao();
+        PedidoDetalle pedD = new PedidoDetalle();
+        PedidoDetalleDao pedDDao = new PedidoDetalleDao();
         MesaDao mes = new MesaDao();
+        ArrayList<String> respuesta = new ArrayList<>();
         switch (accion) {
             case "listProducto":
                 ArrayList<Producto> producto = pro.listaProductosPorCategoria(Integer.parseInt(data.get("pId").getAsString()));
@@ -56,12 +57,25 @@ public class ControlCuenta extends HttpServlet {
                  json = new Gson().toJson(mesas);
                 break;
             case "addPedido":
-                 Pedido ped = new Pedido();
+                 
                  ped.setFecha(Date.valueOf(data.get("pFecha").getAsString()));
                  ped.setEstado("A");
                  ped.setIdMesa(Integer.parseInt(data.get("pMesa").getAsString()));
-                 ped.setIdUsuario(Integer.parseInt(data.get("pUsurio").getAsString()));
-                 json = new Gson().toJson("add");
+                 ped.setIdUsuario(data.get("pUsurio").getAsInt());
+                 respuesta = pedDao.agregar(ped);
+                 json = new Gson().toJson(respuesta);
+                break;  
+                case "addPedidoDetalle":
+                 pedD.setDescripcion(data.get("pDescripcion").getAsString());
+                 pedD.setIdProducto(data.get("pProducto").getAsInt());
+                 pedD.setIdPedido(Integer.parseInt(data.get("pPedido").getAsString()));
+                 pedD.setCantidad(Integer.parseInt(data.get("pTotoal").getAsString()));
+                 pedD.setTotal(Integer.parseInt(data.get("pTotoal").getAsString()));
+                 pedD.setPrecio(Float.parseFloat(data.get("pPrecio").getAsString()));
+                 pedD.setEstado("A");
+                 pedDDao.agregar(pedD);
+                 pedD.setComentario("hola mundo");
+                 json = new Gson().toJson("hola");
                 break;  
               
         }

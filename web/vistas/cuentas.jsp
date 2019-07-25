@@ -119,8 +119,8 @@
                                 </div>
                             </div>
                             <div class="box-footer">
-                                <input type="button" id="btnAddPedido"  class="btn btn-success pull-right" value="Enviar"  />
-                               
+                                
+                                <button class="btn btn-danger pull-right" id="btnAddPedido">Enviar</button>
                                 <input type="text" style="display: none"  >
                                
                                 
