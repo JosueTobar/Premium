@@ -2,6 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/TOBAR/Documents/GitHub/Premium/src/java/modelo/ProductoDao.java</file>
+            <file>file:/C:/Users/TOBAR/Documents/GitHub/Premium/src/java/modelo/PedidoDetalleDao.java</file>
+            <file>file:/C:/Users/TOBAR/Documents/GitHub/Premium/src/java/controlador/ControlCuenta.java</file>
+            <file>file:/C:/Users/TOBAR/Documents/GitHub/Premium/src/java/modelo/PedidoDao.java</file>
+            <file>file:/C:/Users/TOBAR/Documents/GitHub/Premium/src/java/modelo/Producto.java</file>
+            <file>file:/C:/Users/TOBAR/Documents/GitHub/Premium/src/java/modelo/PedidoDetalle.java</file>
+            <file>file:/C:/Users/TOBAR/Documents/GitHub/Premium/web/vistas/mesero.jsp</file>
+            <file>file:/C:/Users/TOBAR/Documents/GitHub/Premium/src/java/modelo/UsuarioDao.java</file>
+            <file>file:/C:/Users/TOBAR/Documents/GitHub/Premium/src/java/modelo/Pedido.java</file>
+        </group>
     </open-files>
 </project-private>

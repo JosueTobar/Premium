@@ -19,7 +19,7 @@ window.onload = function () {
 
 
 $(document).on('click', "#btnAddPedido", function (e) {
-    if(mesaActiva != 0){
+    if(mesaActiva != 0 && nuevoPedido.length > 0){
         insertPedido(mesaActiva,1);
     }  else{
         alert("SELECCIONE UNA MESA ")
@@ -35,23 +35,31 @@ $("#selCategoria").change(function() {
 });
 
 function addPedido(id){
+    var vandera = 0;
     if(mesaActiva != 0){
         for (var i = 0; i < producto.length; i++) {
             if(producto[i][0] == id){
-                nuevoPedido.push([producto[i][1],producto[i][0],$("#catida"+id).val(),mesaActiva,producto[i][3] ]);
+                for (var j = 0; j < nuevoPedido.length; j++) {
+                    if(nuevoPedido[j][2] == id) {
+                        vandera = 1;
+                        nuevoPedido[j][3] =  nuevoPedido[j][3] + parseInt($("#catida"+id).val());
+                    }
+                }
+                if(vandera != 1){
+                    nuevoPedido.push(['add',producto[i][1],producto[i][0],parseInt($("#catida"+id).val()),parseFloat(producto[i][3]) ]);
+                }
             }
         }
         mostraPedido();
     }else{
         alert("SELECCIONE UNA MESA ")
     }
-  
 }
 
 function mostraPedido(){
     $("#pedido").find('tr').remove().end();
     for (var i = 0; i < nuevoPedido.length; i++) {
-        $("#pedido").append("<tr><td>"+nuevoPedido[i][2]+"</td><td>"+nuevoPedido[i][3]+"</td><td> "+nuevoPedido[i][1]+"</td> </tr> ");
+        $("#pedido").append("<tr><td>"+nuevoPedido[i][3]+"</td><td>"+nuevoPedido[i][1]+"</td><td> "+nuevoPedido[i][4]+"</td> </tr> ");
     }
 }
 function insertPedido(mesa,usuario){
@@ -64,16 +72,12 @@ function insertPedido(mesa,usuario){
         data: JSON.stringify(data),
         success: function (response) {
             for (var i = 0; i < nuevoPedido.length; i++) {
-                console.log(response[1],nuevoPedido[i][0], nuevoPedido[i][1],nuevoPedido[i][2] ,nuevoPedido[i][4]);
-                insertarPedidoDetalle(response[1],nuevoPedido[i][0], nuevoPedido[i][1],nuevoPedido[i][2] ,nuevoPedido[i][4]); 
-                
-            }
-             
+                insertarPedidoDetalle(response[1],nuevoPedido[i][1], nuevoPedido[i][2],nuevoPedido[i][3] ,nuevoPedido[i][4]); 
+            } 
         }
     }); 
 }
 function insertarPedidoDetalle(idPedido,descripcion, idProducto,total, precio ){
-    
     var data = {pAccion: "addPedidoDetalle", pPedido: idPedido, pDescripcion: descripcion, pProducto: idProducto, pTotoal: total, pPrecio: precio};
     $.ajax({
         type: "POST", 
@@ -82,9 +86,31 @@ function insertarPedidoDetalle(idPedido,descripcion, idProducto,total, precio ){
         dataType: "json",
         data: JSON.stringify(data),
         success: function (response) {
-               
         }
     }); 
+}
+function updEstadoMesa(){
+
+
+}
+
+function cargarCuenta(idPedido){
+    var data = {pAccion: "ListarCuenta", pId: idPedido};
+    $("#mesas").find('tr').remove().end();
+    $.ajax({
+        type: "POST", 
+        url: "../ControlCuenta.do", 
+        contentType:"application/json; charset=utf-8", 
+        dataType: "json",
+        data: JSON.stringify(data),
+        success: function (response) {
+                $.each(response, function (ind) {
+                    console.log(response);
+                    nuevoPedido.push(['upd',response[ind].descripcion,response[ind].idProducto,response[ind].total,response[ind].precio].response[ind].id);
+                });
+        }
+    });   
+
 }
 
 
@@ -101,8 +127,6 @@ function updatePedidoDetalle(idPedido,descripcion, idProducto, estado, cantidad,
         }
     }); 
 }
-
-
 
 function cargaMesa(idMesa) {
     nuevoPedido = [];

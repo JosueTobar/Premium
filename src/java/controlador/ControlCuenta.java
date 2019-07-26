@@ -1,4 +1,3 @@
-
 package controlador;
 
 import com.google.gson.Gson;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.*;
 
-
 /**
  *
  * @author TOBAR
@@ -25,7 +23,7 @@ public class ControlCuenta extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-           
+
         }
     }
 
@@ -54,30 +52,35 @@ public class ControlCuenta extends HttpServlet {
                 break;
             case "ListarMesa":
                 ArrayList<Mesa> mesas = mes.listaMesasByID(Integer.parseInt(data.get("pId").getAsString()));
-                 json = new Gson().toJson(mesas);
+                json = new Gson().toJson(mesas);
                 break;
             case "addPedido":
-                 
-                 ped.setFecha(Date.valueOf(data.get("pFecha").getAsString()));
-                 ped.setEstado("A");
-                 ped.setIdMesa(Integer.parseInt(data.get("pMesa").getAsString()));
-                 ped.setIdUsuario(data.get("pUsurio").getAsInt());
-                 respuesta = pedDao.agregar(ped);
-                 json = new Gson().toJson(respuesta);
-                break;  
-                case "addPedidoDetalle":
-                 pedD.setDescripcion(data.get("pDescripcion").getAsString());
-                 pedD.setIdProducto(data.get("pProducto").getAsInt());
-                 pedD.setIdPedido(Integer.parseInt(data.get("pPedido").getAsString()));
-                 pedD.setCantidad(Integer.parseInt(data.get("pTotoal").getAsString()));
-                 pedD.setTotal(Integer.parseInt(data.get("pTotoal").getAsString()));
-                 pedD.setPrecio(Float.parseFloat(data.get("pPrecio").getAsString()));
-                 pedD.setEstado("A");
-                 pedDDao.agregar(pedD);
-                 pedD.setComentario("hola mundo");
-                 json = new Gson().toJson("hola");
-                break;  
-              
+
+                ped.setFecha(Date.valueOf(data.get("pFecha").getAsString()));
+                ped.setEstado("A");
+                ped.setIdMesa(Integer.parseInt(data.get("pMesa").getAsString()));
+                ped.setIdUsuario(data.get("pUsurio").getAsInt());
+                respuesta = pedDao.agregar(ped);
+                json = new Gson().toJson(respuesta);
+                break;
+            case "addPedidoDetalle":
+                
+                pedD.setDescripcion(data.get("pDescripcion").getAsString());
+                pedD.setIdProducto(data.get("pProducto").getAsInt());
+                pedD.setIdPedido(Integer.parseInt(data.get("pPedido").getAsString()));
+                pedD.setCantidad(Integer.parseInt(data.get("pTotoal").getAsString()));
+                pedD.setTotal(Integer.parseInt(data.get("pTotoal").getAsString()));
+                pedD.setPrecio(Float.parseFloat(data.get("pPrecio").getAsString()));
+                pedD.setEstado("A");
+                pedDDao.agregar(pedD);
+                pedD.setComentario("hola mundo");
+                json = new Gson().toJson("hola");
+                break;
+             case "ListarCuenta":
+                ArrayList<PedidoDetalle> listaPd = pedDDao.listaPedidoDetallesById( Integer.parseInt(data.get("pId").getAsString()));
+                json = new Gson().toJson(listaPd);
+                 break;
+
         }
 
         response.setContentType("application/json");
@@ -85,7 +88,6 @@ public class ControlCuenta extends HttpServlet {
         response.getWriter().write(json);
     }
 
-  
     @Override
     public String getServletInfo() {
         return "Short description";
