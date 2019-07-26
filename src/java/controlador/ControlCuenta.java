@@ -80,6 +80,11 @@ public class ControlCuenta extends HttpServlet {
                 ArrayList<PedidoDetalle> listaPd = pedDDao.listaPedidoDetallesById( Integer.parseInt(data.get("pId").getAsString()));
                 json = new Gson().toJson(listaPd);
                  break;
+                 
+               case "listarPedidoA":
+                ArrayList<ArrayList<String>> listaPdd = pedDao.ListarPedidosA(Integer.parseInt(data.get("pId").getAsString()));
+                json = new Gson().toJson(listaPdd);
+                 break;
 
         }
 

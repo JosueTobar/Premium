@@ -71,8 +71,7 @@
                     table.addCell(""+rs.getString(2).toString());
                     table.addCell(""+rs.getString(3).toString());
   		 
-		    
-
+		   
 
                 }
 

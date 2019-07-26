@@ -82,6 +82,32 @@ public ArrayList<Pedido> listaPedidosByEstado(String estado) {
             System.out.println("Error SQL-Delete: " + e.getMessage());
         }
         return delete;
-    } 
+    }
+    //LISTAR PEDIDOS ACTIVOS 
+    // select * from pedido where estado ="A"; 
+    
+    public ArrayList<ArrayList<String>> ListarPedidosA(int id) {
+     ArrayList<ArrayList<String>> row = new ArrayList<>();
+        try {
+            ps = this.con.prepareStatement(" select * from vPEDIDO where  mesa_id = "+id+" and estado = 'A';");
+            rs = ps.executeQuery();         
+            while (rs.next()) {
+                ArrayList<String> col = new ArrayList<>(); 
+                col.add(rs.getString("mesa_id"));
+                col.add(rs.getString("DESCRIPCION"));
+                col.add(rs.getString("PRODUCTO_ID"));
+                col.add(rs.getString("PEDIDO_ID"));
+                col.add(rs.getString("ESTADO"));
+                col.add(rs.getString("TOTAL"));
+                col.add(rs.getString("PRECIO"));
+                col.add(rs.getString("total_precio"));
+                row.add(col);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error SQL-Add: " + e.getMessage());
+        }
+        
+        return row;
+    }
 
 }

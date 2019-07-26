@@ -151,7 +151,7 @@
               <div class="col-lg-5">
               </div>
             </div>
-            <div class="row">
+            <div class="row" id="contenedorPedidos">
                 
               <div class="col-lg-4"> 
               <div class="box box-primary">
@@ -178,52 +178,6 @@
               
               </div>
               
-              
-              <div class="col-lg-4">
-              <div class="box box-primary">
-                            <div class="box-header with-border">
-                                <h3 class="box-title" id="tituloForm">Cuenta</h3>
-                            </div>
-                            <div class="box-body">
-                                <div class="contenedorP">
-                                    <table class="table" id="tableP">
-                                        <tbody id="pedido">
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="box-footer">
-                                
-                                <button class="btn btn-danger pull-right" id="btnAddPedido">Enviar</button>
-                                <input type="text" style="display: none"  >
-                               
-                                
-                            </div>
-                        </div></div>
-              <div class="col-lg-4">
-              <div class="box box-primary">
-                            <div class="box-header with-border">
-                                <h3 class="box-title" id="tituloForm">Cuenta</h3>
-                            </div>
-                            <div class="box-body">
-                                <div class="contenedorP">
-                                    <table class="table" id="tableP">
-                                        <tbody id="pedido">
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="box-footer">
-                                
-                                <button class="btn btn-danger pull-right" id="btnAddPedido">Enviar</button>
-                                <input type="text" style="display: none"  >
-                               
-                                
-                            </div>
-                        </div></div>
-              
               </div>
             </div>
             <!-- /.box-body -->
@@ -247,7 +201,7 @@
 <script src="../resources/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../resources/dist/js/demo.js"></script>
-<script src="../resources/js/mantenimientos/ceuntas.js"></script> 
+<script src="../resources/js/mantenimientos/cocina.js"></script> 
 
 </body>
 </html>
