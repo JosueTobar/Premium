@@ -89,7 +89,7 @@ public ArrayList<Pedido> listaPedidosByEstado(String estado) {
     public ArrayList<ArrayList<String>> ListarPedidosA(int id) {
      ArrayList<ArrayList<String>> row = new ArrayList<>();
         try {
-            ps = this.con.prepareStatement(" select * from vPEDIDO where  mesa_id = "+id+" and estado = 'A';");
+            ps = this.con.prepareStatement(" select * from vPEDIDO where  pedido_id = "+id+" and estado = 'A';");
             rs = ps.executeQuery();         
             while (rs.next()) {
                 ArrayList<String> col = new ArrayList<>(); 
@@ -127,8 +127,25 @@ public ArrayList<Pedido> listaPedidosByEstado(String estado) {
         
         return row;
     }
-
-
+  // select distinct mesa_id,nombremesa, pedido_id from vPEDIDO; 
+ public ArrayList<ArrayList<String>> ListarCuentas() {
+     ArrayList<ArrayList<String>> row = new ArrayList<>();
+        try {
+            ps = this.con.prepareStatement("select distinct mesa_id,nombremesa, pedido_id from vPEDIDO;");
+            rs = ps.executeQuery();         
+            while (rs.next()) {
+                ArrayList<String> col = new ArrayList<>(); 
+                col.add(rs.getString("mesa_id"));
+                col.add(rs.getString("nombremesa"));
+                col.add(rs.getString("pedido_id"));
+                row.add(col);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error SQL-Add: " + e.getMessage());
+        }
+        
+        return row;
+    }
 }
 
   

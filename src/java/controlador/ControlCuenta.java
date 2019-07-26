@@ -64,7 +64,7 @@ public class ControlCuenta extends HttpServlet {
                 json = new Gson().toJson(respuesta);
                 break;
             case "addPedidoDetalle":
-                
+
                 pedD.setDescripcion(data.get("pDescripcion").getAsString());
                 pedD.setIdProducto(data.get("pProducto").getAsInt());
                 pedD.setIdPedido(Integer.parseInt(data.get("pPedido").getAsString()));
@@ -76,20 +76,26 @@ public class ControlCuenta extends HttpServlet {
                 pedD.setComentario("hola mundo");
                 json = new Gson().toJson("hola");
                 break;
-             case "ListarCuenta":
-                ArrayList<PedidoDetalle> listaPd = pedDDao.listaPedidoDetallesById( Integer.parseInt(data.get("pId").getAsString()));
+            case "ListarCuenta":
+                ArrayList<PedidoDetalle> listaPd = pedDDao.listaPedidoDetallesById(Integer.parseInt(data.get("pId").getAsString()));
                 json = new Gson().toJson(listaPd);
-                 break;
-                 
-               case "listarPedidoA":
+                break;
+
+            case "listarPedidoA":
                 ArrayList<ArrayList<String>> listaPdd = pedDao.ListarPedidosA(Integer.parseInt(data.get("pId").getAsString()));
                 json = new Gson().toJson(listaPdd);
-                 break;
-                 
-                case "listarMesaA":
+                break;
+
+            case "listarMesaA":
                 ArrayList<ArrayList<String>> listaMesaA = pedDao.ListarMesaA();
                 json = new Gson().toJson(listaMesaA);
-                 break;
+                break;
+            //
+
+            case "ListarCuentas":
+                ArrayList<ArrayList<String>> listaCuentas = pedDao.ListarCuentas();
+                json = new Gson().toJson(listaCuentas);
+                break;
 
         }
 
