@@ -72,7 +72,9 @@
       </a>
       <ul class="treeview-menu">
         <li><a href="../vistas/cuentas.jsp"><i class="fa fa-circle-o"></i>Neuva Cuenta</a></li> 
+          <li><a href="../vistas/cocina.jsp"><i class="fa fa-circle-o"></i>Cocina </a></li> 
       </ul>
     </li>
+    
   </ul>
 </section>
