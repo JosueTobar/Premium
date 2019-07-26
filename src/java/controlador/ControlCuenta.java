@@ -85,6 +85,11 @@ public class ControlCuenta extends HttpServlet {
                 ArrayList<ArrayList<String>> listaPdd = pedDao.ListarPedidosA(Integer.parseInt(data.get("pId").getAsString()));
                 json = new Gson().toJson(listaPdd);
                  break;
+                 
+                case "listarMesaA":
+                ArrayList<ArrayList<String>> listaMesaA = pedDao.ListarMesaA();
+                json = new Gson().toJson(listaMesaA);
+                 break;
 
         }
 

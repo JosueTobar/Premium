@@ -109,5 +109,26 @@ public ArrayList<Pedido> listaPedidosByEstado(String estado) {
         
         return row;
     }
+    
+    public ArrayList<ArrayList<String>> ListarMesaA() {
+     ArrayList<ArrayList<String>> row = new ArrayList<>();
+        try {
+            ps = this.con.prepareStatement(" select * from pedido where estado ='A';");
+            rs = ps.executeQuery();         
+            while (rs.next()) {
+                ArrayList<String> col = new ArrayList<>(); 
+                col.add(rs.getString("id"));
+                col.add(rs.getString("mesa_id"));
+                row.add(col);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error SQL-Add: " + e.getMessage());
+        }
+        
+        return row;
+    }
+
 
 }
+
+  

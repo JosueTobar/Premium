@@ -147,36 +147,13 @@
             </div>
             <div class="row">
               <div class="col-lg-5"> </div>
-              <div class="col-lg-2">  <button class="btn btn-danger pull-right" id="btnBuscar">Actualizar</button> </div>
+              <div class="col-lg-2">  <button class="btn btn-danger pull-right" id="btnBuscarMesa">Actualizar</button> </div>
               <div class="col-lg-5">
               </div>
             </div>
             <div class="row" id="contenedorPedidos">
                 
-              <div class="col-lg-4"> 
-              <div class="box box-primary">
-                            <div class="box-header with-border">
-                                <h3 class="box-title" id="tituloForm">Cuenta</h3>
-                            </div>
-                            <div class="box-body">
-                                <div class="contenedorP">
-                                    <table class="table" id="tableP">
-                                        <tbody id="pedido">
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="box-footer">
-                                
-                                <button class="btn btn-danger pull-right" id="btnAddPedido">Enviar</button>
-                                <input type="text" style="display: none"  >
-                               
-                                
-                            </div>
-                        </div>
-              
-              </div>
+ 
               
               </div>
             </div>
