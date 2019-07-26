@@ -16,7 +16,7 @@ function buscarCuentas(){
         success: function (response) {
                $.each(response, function (ind) {
           
-                $("#tablaC").append("<tr><td>Accion </td> <td>"+response[ind][0]+"</td> <td>"+response[ind][1]+"</td><td>"+response[ind][2]+"</td></tr>");
+                $("#tablaC").append("<tr><td><a href='../pdf/factura.jsp?id="+response[ind][0]+"'> FACTURAR </a> </td> <td>"+response[ind][0]+"</td> <td>"+response[ind][1]+"</td><td>"+response[ind][2]+"</td></tr>");
             });
         }
     }); 

@@ -23,7 +23,9 @@ public class UsuarioDao {
     Connection con()throws SQLException, ClassNotFoundException{
             Class.forName(c.getDriver());
             return DriverManager.getConnection(c.getUrl(), c.getUser(), c.getContra());
-    }
+    } 
+    
+    
     public int validar(String username, String pass, String sucursal){
         int nivel =0 ;
         try {
